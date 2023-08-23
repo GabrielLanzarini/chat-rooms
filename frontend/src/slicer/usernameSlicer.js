@@ -3,11 +3,12 @@ import { createSlice } from "@reduxjs/toolkit"
 export const usernameSlicer = createSlice({
     name: "setUsername",
     initialState: {
-        value: "",
+        value: localStorage.getItem("username"),
     },
     reducers: {
         create: (state, action) => {
             state.value = action.payload
+            localStorage.setItem("username", action.payload)
         },
     },
 })

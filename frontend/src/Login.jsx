@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 export default function Login() {
     const [inputValue, setInputValue] = useState("")
     const navigate = useNavigate()
+    const username = useSelector((state) => state.username.value)
 
     const dispatch = useDispatch()
 

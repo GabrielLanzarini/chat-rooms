@@ -1,22 +1,45 @@
 import { useEffect, useState } from "react"
 import RoomCard from "./components/RoomCard"
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import { io } from "socket.io-client"
+import config from "./config.json"
+
+const socket = io(`http://${config.API_IP}:5000`)
 
 export default function Rooms() {
     const [roomsRender, setRoomRender] = useState([])
+    const [serverData, setServerData] = useState([])
+    const navigate = useNavigate()
     const username = useSelector((state) => state.username.value)
 
-    const handleRenderRooms = () => {
+    const getRooms = async () => {
+        const { data } = await axios.get(`http://${config.API_IP}:5000/rooms`)
+        setServerData(data)
+    }
+
+    const handleRenderRooms = async () => {
         const arr = []
-        for (let i = 0; i < 5; i++) {
-            arr.push([<RoomCard online={0} roomId={i} roomName={`Room${i}`} />])
-        }
+        serverData.map((a, i) => {
+            arr.push([<RoomCard online={a.online} roomId={a.id} roomName={a.name} />])
+        })
         setRoomRender(arr)
     }
 
     useEffect(() => {
-        handleRenderRooms()
+        getRooms()
+        socket.on("rooms", (rooms) => {
+            console.log(rooms)
+            setServerData(rooms)
+        })
     }, [])
+
+    useEffect(() => {
+        handleRenderRooms()
+    }, [serverData])
+
+    if (!username) return navigate("/")
 
     return (
         <div className="flex items-center justify-center w-screen h-screen flex-col gap-3 bg-slate-950">
