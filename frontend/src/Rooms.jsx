@@ -42,9 +42,9 @@ export default function Rooms() {
     if (!username) return navigate("/")
 
     return (
-        <div className="flex items-center justify-center w-screen h-screen flex-col gap-3 bg-slate-950">
+        <div className="flex  items-center justify-center  md:gap-5 lg:py-10 md:py-10  w-screen md:h-fit h-screen flex-col gap-3 bg-slate-950">
             <h1 className="text-white text-4xl font-bold">Available Rooms</h1>
-            <div className="grid grid-cols-3 gap-4">{roomsRender}</div>
+            <div className="grid md:grid-cols-1 lg:grid-cols-2 grid-cols-3 gap-4">{roomsRender}</div>
         </div>
     )
 }

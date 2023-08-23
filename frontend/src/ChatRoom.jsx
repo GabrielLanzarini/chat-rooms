@@ -26,7 +26,7 @@ export default function ChatRoom() {
         const arr = []
         serverData.map((data, i) => {
             arr.push([
-                <div key={i} className="animate__animated  animate__fadeInUp flex items-end gap-2 w-full ">
+                <div key={i} className="animate__animated  animate__fadeInUp md:flex-col md:items-start items-end flex  gap-2 w-full ">
                     <div className="bg-slate-700 px-5 w-fit max-w-[92%] py-2 rounded-lg">
                         <h1 className="font-bold text-teal-400">{data[0].username}</h1>
                         <p className="text-white break-words">{data[0].message}</p>
@@ -86,17 +86,22 @@ export default function ChatRoom() {
 
     return (
         <div className="flex items-center justify-center w-screen h-screen flex-col gap-3 bg-slate-950">
-            <div onScroll={handleArrow} id="scroll" className="scroll-smooth w-[60%] h-[90%] overflow-y-auto overflow-x-hidden gap-2 flex flex-col ">
+            <div onScroll={handleArrow} id="scroll" className="scroll-smooth w-[60%] md:w-[90%] h-[90%] md:h-[85%] overflow-y-auto overflow-x-hidden gap-2 flex flex-col ">
                 {messages}
             </div>
 
-            {!visibleArrow && (
-                <svg onClick={handleScroll} className="cursor-pointer w-10 hover:animate-bounce fill-teal-400 fixed bottom-[80px] right-[21%]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                    <path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM13 12V8H11V12H8L12 16L16 12H13Z"></path>
-                </svg>
-            )}
-            <div className="w-[60%] flex items-center justify-center relative">
+            <div className="w-[60%] md:w-[90%] flex items-center  justify-center relative">
+                {!visibleArrow && (
+                    <svg
+                        onClick={handleScroll}
+                        className="right-[5%] bottom-[55px] cursor-pointer w-10 hover:animate-bounce fill-teal-400 absolute "
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                    >
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM13 12V8H11V12H8L12 16L16 12H13Z"></path>
+                    </svg>
+                )}
                 <input
                     onKeyDown={handleKeyEnter}
                     value={inputValue}
