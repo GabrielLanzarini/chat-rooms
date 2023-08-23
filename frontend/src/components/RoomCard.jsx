@@ -13,7 +13,7 @@ export default function RoomCard({ roomName, roomId, online }) {
             <h1 className="text-white text-4xl font-bold">{roomName}</h1>
             <p className="text-white flex items-center gap-2">
                 {online}/10 online
-                <div className="bg-green-400 w-[8px] h-[8px] rounded-full drop-shadow" />
+                <i className="bg-green-400 w-[8px] h-[8px] rounded-full drop-shadow" />
             </p>
             <button
                 onClick={handleButton}

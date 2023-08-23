@@ -22,7 +22,7 @@ export default function Rooms() {
     const handleRenderRooms = async () => {
         const arr = []
         serverData.map((a, i) => {
-            arr.push([<RoomCard online={a.online} roomId={a.id} roomName={a.name} />])
+            arr.push([<RoomCard key={i}  online={a.online} roomId={a.id} roomName={a.name} />])
         })
         setRoomRender(arr)
     }
